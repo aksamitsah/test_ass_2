@@ -1,24 +1,23 @@
 package me.aksamitsah.test_asc;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button add, history;
-    EditText firstname,lastname,contact, address;
-    Map<String, String[]> data;
     public static final String KEY = "RANDOM";
+    public HashMap<String, Student> data = new HashMap<>();
+    Button add, history;
+    EditText firstname, lastname, contact, address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +39,17 @@ public class MainActivity extends AppCompatActivity {
             String contact1 = contact.getText().toString().trim();
             String address1 = address.getText().toString().trim();
 
-            if(!firstname1.isEmpty() && !lastname1.isEmpty() && !contact1.isEmpty() && !address1.isEmpty())
-            {
-                addValue(firstname1,lastname1,contact1,address1);
-            }
-            else
-            {
-                Toast.makeText(this, "fill all", Toast.LENGTH_SHORT).show();
+            if (!firstname1.isEmpty() && !lastname1.isEmpty() && !contact1.isEmpty() && !address1.isEmpty()) {
+                addValue(firstname1, lastname1, contact1, address1);
+            } else {
+                Toast.makeText(this, "fill all field", Toast.LENGTH_SHORT).show();
             }
 
         });
 
         history.setOnClickListener(v -> {
-            Intent i = new Intent(this,History.class);
-            i.putExtra(KEY, (Parcelable) data);
+            Intent i = new Intent(this, History.class);
+            i.putExtra(KEY, hashInToArray(data));
             startActivity(i);
 
         });
@@ -61,8 +57,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void addValue(String firstname1, String lastname1, String contact1, String address1) {
 
-        data = new HashMap<>();
-        data.put(firstname1,new String[] {lastname1,contact1,address1});
+        data.put(firstname1, new Student(firstname1, lastname1, contact1, address1));
         Toast.makeText(this, "Data Added", Toast.LENGTH_SHORT).show();
+    }
+
+    private ArrayList<Student> hashInToArray(HashMap<String, Student> data1) {
+        TreeMap<String, Student> sorted = new TreeMap<>(data1);
+        return new ArrayList<>(sorted.values());
     }
 }

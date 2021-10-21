@@ -1,6 +1,21 @@
 package me.aksamitsah.test_asc;
 
-public class Student {
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Student implements Parcelable {
+    public static final Creator<Student> CREATOR = new Creator<Student>() {
+        @Override
+        public Student createFromParcel(Parcel in) {
+            return new Student(in);
+        }
+
+        @Override
+        public Student[] newArray(int size) {
+            return new Student[size];
+        }
+    };
     String firstname;
     String lastname;
     String contact;
@@ -13,35 +28,42 @@ public class Student {
         this.address = address;
     }
 
+    protected Student(Parcel in) {
+        firstname = in.readString();
+        lastname = in.readString();
+        contact = in.readString();
+        address = in.readString();
+    }
+
     public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
 
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
 
     public String getContact() {
         return contact;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(firstname);
+        dest.writeString(lastname);
+        dest.writeString(contact);
+        dest.writeString(address);
     }
 }

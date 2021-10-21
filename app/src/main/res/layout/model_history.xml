@@ -5,22 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="left"
-    android:layout_margin="20dp">
+    android:layout_margin="20dp"
+    tools:ignore="RtlHardcoded">
 
 
     <TextView
-        android:id="@+id/firstname"
+        android:id="@+id/firstname1"
         android:layout_width="91dp"
         android:layout_height="wrap_content"
-        android:text="firstname"
-        tools:layout_editor_absoluteX="1dp"
-        tools:ignore="MissingConstraints" />
+        android:text="@string/firstname"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp" />
 
     <TextView
         android:id="@+id/lastname"
         android:layout_width="92dp"
         android:layout_height="wrap_content"
-        android:text="lastname"
+        android:text="@string/lastname"
         app:layout_constraintEnd_toStartOf="@+id/contact"
         tools:ignore="MissingConstraints" />
 
@@ -28,7 +29,7 @@
         android:id="@+id/contact"
         android:layout_width="91dp"
         android:layout_height="wrap_content"
-        android:text="contact"
+        android:text="@string/contact"
         app:layout_constraintEnd_toStartOf="@+id/address"
         tools:ignore="MissingConstraints" />
 
@@ -36,7 +37,7 @@
         android:id="@+id/address"
         android:layout_width="92dp"
         android:layout_height="wrap_content"
-        android:text="address"
+        android:text="@string/address"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
